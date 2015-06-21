@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Developing Data Products - Shiny App</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Developing Data Products - Shiny App">
+  <meta name="author" content="Saravanan B">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="http://slidifylibraries2.googlecode.com/git/inst/libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="http://slidifylibraries2.googlecode.com/git/inst/libraries/widgets/interactive/css/aceeditor.css"></link>
+<link rel=stylesheet href="http://slidifylibraries2.googlecode.com/git/inst/libraries/widgets/quiz/css/demo.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="http://slidifylibraries2.googlecode.com/git/inst/libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/js/slides" 
+    src="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Developing Data Products - Shiny App</h1>
+    <h2></h2>
+    <p>Saravanan B<br/>06/15/2015</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Purpose and Objective</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>This documentation is created as part of the peer assessment for the  Developing Data Products class and serves as the user manual for the app. The course project has two skills to be mastered which are: </p>
+
+<ul>
+<li><p>shiny to build data product application</p></li>
+<li><p>R-Presentation or slidify to create data product related presentations</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Motor Trend Car Road Tests Explorer</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>This shiny application will help in mtcars data exlporation and also do simple linear regression modelling in predicting Miles Per Gallon (MPG) against any of the other variables.</p>
+
+<ul>
+<li>
+The Miles Per Gallon (MPG) outcome variable will be observed in relation to other predictor variables in the mtcars dataset.</li>
+<li>
+The user can choose the predictor variable from the dropdown list. </li>
+<li>
+The shiny app will then plot MPG against the chosen predictor variable. </li>
+<li>
+A linear model will also be fit and added to the plot.</li>
+</ul>
+
+<p>The application can be accessed at the following URL: </p>
+
+<ul>
+<li>
+<a href="https://yethindran.shinyapps.io/ddp_app">https://yethindran.shinyapps.io/ddp_app</a></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>How to use the App</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Below is a screenshot of the app. The user can choose one of the predictor variables and change the plot of MPG versus the chosen variable and also see the fitted linear regression model.</p>
+
+<p><img src = './assets/img/screenshot.png'></img></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Underlying Code</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Here&#39;s some R code from the application:</p>
+
+<pre><code class="r">library(datasets)
+
+df &lt;- mtcars
+df$am &lt;- factor(df$am, labels = c(&quot;Automatic&quot;, &quot;Manual&quot;))
+
+plot(mpg ~ wt, data = df)
+fit &lt;- lm(mpg ~ wt, data = mtcars)
+abline(fit)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Purpose and Objective'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Motor Trend Car Road Tests Explorer'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='How to use the App'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Underlying Code'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  <script src="http://slidifylibraries2.googlecode.com/git/inst/libraries/widgets/interactive/js/ace/js/ace.js"></script>
+<script src="http://slidifylibraries2.googlecode.com/git/inst/libraries/widgets/interactive/js/opencpu-0.5.js"></script>
+<script src="http://slidifylibraries2.googlecode.com/git/inst/libraries/widgets/interactive/js/interactive.js"></script>
+<script src="http://slidifylibraries2.googlecode.com/git/inst/libraries/widgets/quiz/js/jquery.quiz.js"></script>
+<script src="http://slidifylibraries2.googlecode.com/git/inst/libraries/widgets/quiz/js/mustache.min.js"></script>
+<script src="http://slidifylibraries2.googlecode.com/git/inst/libraries/widgets/quiz/js/quiz-app.js"></script>
+
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="http://slidifylibraries2.googlecode.com/git/inst/libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="http://slidifylibraries2.googlecode.com/git/inst/libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
